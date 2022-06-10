@@ -5,51 +5,21 @@ import org.junit.jupiter.api.Test;
 
 public class ActorTests {
 
-   Actor testActor = new Actor("john","Doe");
-   Actor sarah = new Actor("sarah","doe");
-   Actor john = new Actor("john","smith");
-
-
-   // Actor testActor2 = new Actor();
-    //int expected = 5;
-
-
-
-
-   public void example() {
-
-        int x =5;
-        int y= 4;
-
-        System.out.println(x+y);
-
-
-
-
-   }
-
-
-
-
+    Actor testActor = new Actor("first_name", "last_name");
+    Actor testActor2 = new Actor();
 
 
 
     @Test
     public void testActor(){
 
-        System.out.println(sarah.getLast_name());
-        Assertions.assertEquals("Doe",testActor.getLast_name(), "first_name is not initialised");
-        //Assertions.assertEquals("last_name", testActor.getLast_name(), "last_name is not initialised");
+        Assertions.assertEquals("first_name",testActor.getFirst_name(), "first_name is not initialised");
+        Assertions.assertEquals("last_name", testActor.getLast_name(), "last_name is not initialised");
 
-        //Assertions.assertEquals(expected, example(),"if example does not return 5, test failed");
-
-        example();
-
-
-
-
-
-
+        testActor2.setFirst_name("testFName");
+        Assertions.assertEquals("testFName", testActor2.getFirst_name(),"First Name Does not Exist");
+        testActor2.setLast_name("testLName");
+        Assertions.assertEquals("testLName", testActor2.getLast_name(),"Last Name does not Exist");
 
 
     }
