@@ -2,6 +2,11 @@ package com.tsi.o.blidi.program;
 
 import com.tsi.o.blidi.program.Actor.Actor;
 import com.tsi.o.blidi.program.Actor.ActorRepository;
+import com.tsi.o.blidi.program.Category.CategoryRepository;
+import com.tsi.o.blidi.program.Film.FilmRepository;
+import com.tsi.o.blidi.program.FilmActor.FilmActorRepository;
+import com.tsi.o.blidi.program.FilmCategory.FilmCategoryRepository;
+import com.tsi.o.blidi.program.Language.LanguageRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,19 +17,36 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class MockitoTest {
-
+    @Mock
     private MyFirstMicroServiceApplication myFirstMicroServiceApplication;
     @Mock
     private ActorRepository actorRepository;
+    @Mock
+    private FilmRepository filmRepository;
+    @Mock
+    private FilmCategoryRepository filmCategoryRepository;
+    @Mock
+    private FilmActorRepository filmActorRepository;
+    @Mock
+    private CategoryRepository categoryRepository;
+    @Mock
+    private LanguageRepository languageRepository;
+
 
     @BeforeEach
     void setUp(){
-        //myFirstMicroServiceApplication = new MyFirstMicroServiceApplication(actorRepository);
+
+        actorRepository= mock(ActorRepository.class);
+        categoryRepository= mock(CategoryRepository.class);
+        filmRepository= mock(FilmRepository.class);
+        filmActorRepository= mock(FilmActorRepository.class);
+        filmCategoryRepository= mock(FilmCategoryRepository.class);
+        languageRepository = mock(LanguageRepository.class);
+        myFirstMicroServiceApplication = new MyFirstMicroServiceApplication(actorRepository, categoryRepository ,filmRepository, filmActorRepository, filmCategoryRepository, languageRepository);
 
     }
 
