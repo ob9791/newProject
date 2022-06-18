@@ -1,5 +1,7 @@
 package com.tsi.o.blidi.program;
 
+import com.tsi.o.blidi.program.Actor.Actor;
+import com.tsi.o.blidi.program.Actor.ActorRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,7 +24,7 @@ public class MockitoTest {
 
     @BeforeEach
     void setUp(){
-        myFirstMicroServiceApplication = new MyFirstMicroServiceApplication(actorRepository);
+        //myFirstMicroServiceApplication = new MyFirstMicroServiceApplication(actorRepository);
 
     }
 

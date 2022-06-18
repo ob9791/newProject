@@ -1,5 +1,6 @@
 package com.tsi.o.blidi.program;
 
+import com.tsi.o.blidi.program.Actor.Actor;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -10,10 +11,13 @@ public class ActorTests {
 
 
 
+
+
     @Test
     public void testActor(){
 
         Assertions.assertEquals("first_name",testActor.getFirst_name(), "first_name is not initialised");
+
         Assertions.assertEquals("last_name", testActor.getLast_name(), "last_name is not initialised");
 
         testActor2.setFirst_name("testFName");
