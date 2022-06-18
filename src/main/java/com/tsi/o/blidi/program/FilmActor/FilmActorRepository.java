@@ -8,6 +8,6 @@ import java.util.List;
 @Repository
 public interface FilmActorRepository extends CrudRepository<FilmActor, Integer> {
 
-    List<FilmActor> findByActor_id(int actor_id);
+
 
 }
