@@ -2,12 +2,15 @@ package com.tsi.o.blidi.program;
 
 import com.tsi.o.blidi.program.Actor.Actor;
 import com.tsi.o.blidi.program.Actor.ActorRepository;
+import com.tsi.o.blidi.program.Category.Category;
 import com.tsi.o.blidi.program.Category.CategoryRepository;
 import com.tsi.o.blidi.program.Film.Film;
 import com.tsi.o.blidi.program.Film.FilmRepository;
+import com.tsi.o.blidi.program.FilmActor.FilmActor;
 import com.tsi.o.blidi.program.FilmActor.FilmActorRepository;
 import com.tsi.o.blidi.program.FilmCategory.FilmCategory;
 import com.tsi.o.blidi.program.FilmCategory.FilmCategoryRepository;
+import com.tsi.o.blidi.program.Language.Language;
 import com.tsi.o.blidi.program.Language.LanguageRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -163,6 +166,55 @@ public class MockitoTest {
         Iterable<FilmCategory> actual = myFirstMicroServiceApplication.getAllFilmCategories();
 
         Assertions.assertEquals(expected,actual,"Film ID and Catgegory ID do not match");
+    }
+
+    @Test
+    public void testGetAllFilmActors(){
+        List<FilmActor> filmActorList = new ArrayList<FilmActor>();
+        FilmActor testFilmActor = new FilmActor(3,4);
+        filmActorList.add(testFilmActor);
+
+        Iterable<FilmActor> filmActorIterable = filmActorList;
+
+        when(filmActorRepository.findAll()).thenReturn(filmActorIterable);
+
+        Iterable<FilmActor> expected = filmActorIterable;
+        Iterable<FilmActor> actual = myFirstMicroServiceApplication.getAllFilmActors();
+
+        Assertions.assertEquals(expected,actual,"Actor ID and Film ID do not match");
+
+    }
+
+    @Test
+    public void testGetAllLanguages(){
+        List<Language> languageList = new ArrayList<Language>();
+        Language testLang = new Language(3,"Japanese");
+        languageList.add(testLang);
+
+        Iterable<Language> languageIterable = languageList;
+
+        when(languageRepository.findAll()).thenReturn(languageIterable);
+
+        Iterable<Language> expected = languageIterable;
+        Iterable<Language> actual = myFirstMicroServiceApplication.getAllLanguages();
+
+        Assertions.assertEquals(expected,actual,"Language not initialised");
+    }
+
+    @Test
+    public void testGetAllCategories(){
+        List<Category> categoryList = new ArrayList<Category>();
+        Category testCategory = new Category(5,"Horror");
+        categoryList.add(testCategory);
+
+        Iterable<Category> categoryIterable = categoryList;
+
+        when(categoryRepository.findAll()).thenReturn(categoryIterable);
+
+        Iterable<Category> expected = categoryIterable;
+        Iterable<Category> actual = myFirstMicroServiceApplication.getAllCategories();
+
+        Assertions.assertEquals(expected,actual,"Category not initialised");
     }
 
 
