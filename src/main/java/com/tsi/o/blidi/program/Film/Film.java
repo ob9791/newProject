@@ -89,7 +89,7 @@ public class Film{
         return language_id;
     }
 
-    public void setLanguageId(int language_id) {
+    public void setLanguage_id(int language_id) {
         this.language_id = language_id;
     }
 }

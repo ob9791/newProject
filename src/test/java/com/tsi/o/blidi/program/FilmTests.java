@@ -41,6 +41,39 @@ public class FilmTests {
         Assertions.assertEquals("PG13", testFilm.getRating(),"Rating not set correctly");
     }
 
+    @Test
+    public void testGetDescription(){
+        Assertions.assertEquals("Gorilla",testFilm.getDescription(),"Description incorrect");
+    }
+
+    @Test
+    public void testSetDescription(){
+        testFilm.setDescription("Gorilla and Dinosaur");
+        Assertions.assertEquals("Gorilla and Dinosaur",testFilm.getDescription(),"Description not set correctly");
+    }
+
+    @Test
+    public void testGetLength(){
+        Assertions.assertEquals(120,testFilm.getLength(),"Incorrect Film Length");
+    }
+
+    @Test
+    public void testSetLength(){
+        testFilm.setLength(150);
+        Assertions.assertEquals(150,testFilm.getLength(),"Movie Length not set correctly");
+    }
+
+    @Test
+    public void testGetLanguage_id(){
+        Assertions.assertEquals(1,testFilm.getLanguage_id(),"Incorrect Language ID");
+    }
+
+    @Test
+    public void testSetLanguage_id(){
+        testFilm.setLanguage_id(5);
+        Assertions.assertEquals(5,testFilm.getLanguage_id(),"Language ID not set correctly");
+    }
+
 
 
 }
