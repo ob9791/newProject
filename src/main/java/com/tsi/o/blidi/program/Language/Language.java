@@ -16,8 +16,8 @@ public class Language {
 
     // Constructor
 
-    public Language(int languageId, String lang) {
-        this.language_id = languageId;
+    public Language(int language_id, String lang) {
+        this.language_id = language_id;
         this.lang = lang;
     }
 

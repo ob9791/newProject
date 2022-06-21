@@ -31,13 +31,15 @@ public class Film{
         this.language_id = language_id;
     }
 
-    public Film(int film_id, String title, String description, int length, int language_id) {
+    public Film(int film_id, String title, String description,String rating, int length, int language_id) {
         this.film_id = film_id;
         this.title = title;
         this.description = description;
+        this.rating = rating;
         this.length = length;
         this.language_id = language_id;
     }
+
     public Film(){}
 
 
@@ -71,7 +73,7 @@ public class Film{
         return rating;
     }
 
-    public void setRating(){
+    public void setRating(String rating){
         this.rating = rating;
     }
 

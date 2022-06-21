@@ -3,8 +3,10 @@ package com.tsi.o.blidi.program;
 import com.tsi.o.blidi.program.Actor.Actor;
 import com.tsi.o.blidi.program.Actor.ActorRepository;
 import com.tsi.o.blidi.program.Category.CategoryRepository;
+import com.tsi.o.blidi.program.Film.Film;
 import com.tsi.o.blidi.program.Film.FilmRepository;
 import com.tsi.o.blidi.program.FilmActor.FilmActorRepository;
+import com.tsi.o.blidi.program.FilmCategory.FilmCategory;
 import com.tsi.o.blidi.program.FilmCategory.FilmCategoryRepository;
 import com.tsi.o.blidi.program.Language.LanguageRepository;
 import org.junit.jupiter.api.Assertions;
@@ -15,11 +17,14 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
+// the below mocks all the repositories we need, creates the blueprints, mock arrays/data need to be added.
 public class MockitoTest {
     @Mock
     private MyFirstMicroServiceApplication myFirstMicroServiceApplication;
@@ -38,52 +43,52 @@ public class MockitoTest {
 
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
 
-        actorRepository= mock(ActorRepository.class);
-        categoryRepository= mock(CategoryRepository.class);
-        filmRepository= mock(FilmRepository.class);
-        filmActorRepository= mock(FilmActorRepository.class);
-        filmCategoryRepository= mock(FilmCategoryRepository.class);
+        actorRepository = mock(ActorRepository.class);
+        categoryRepository = mock(CategoryRepository.class);
+        filmRepository = mock(FilmRepository.class);
+        filmActorRepository = mock(FilmActorRepository.class);
+        filmCategoryRepository = mock(FilmCategoryRepository.class);
         languageRepository = mock(LanguageRepository.class);
-        myFirstMicroServiceApplication = new MyFirstMicroServiceApplication(actorRepository, categoryRepository ,filmRepository, filmActorRepository, filmCategoryRepository, languageRepository);
+        myFirstMicroServiceApplication = new MyFirstMicroServiceApplication(actorRepository, categoryRepository, filmRepository, filmActorRepository, filmCategoryRepository, languageRepository);
 
     }
 
     @Test
-    public void getAllActors(){
+    public void getAllActors() {
 
         myFirstMicroServiceApplication.getALLActors();
         verify(actorRepository).findAll();
     }
 
     @Test
-    public void testAddActor(){
+    public void testAddActor() {
 
-        Actor savedActor = new Actor("testFirstname","testLastName");
+        Actor savedActor = new Actor("testFirstname", "testLastName");
         String expected = "saved";
-        String Actual = myFirstMicroServiceApplication.addActor(savedActor.getFirst_name(),savedActor.getLast_name());
+        String Actual = myFirstMicroServiceApplication.addActor(savedActor.getFirst_name(), savedActor.getLast_name());
         ArgumentCaptor<Actor> actorArgumentCaptor = ArgumentCaptor.forClass(Actor.class);
         verify(actorRepository).save(actorArgumentCaptor.capture());
         actorArgumentCaptor.getValue();
-        Assertions.assertEquals(expected,Actual,"Actor is not Saved into database");
+        Assertions.assertEquals(expected, Actual, "Actor is not Saved into database");
 
     }
 
     @Test
-    public void testDeleteActor(){
-        Actor deletedActor = new Actor("testFirstname","testLastname");
+    public void testDeleteActor() {
+        Actor deletedActor = new Actor("testFirstname", "testLastname");
         deletedActor.setActor_id(1);
         String Actual = myFirstMicroServiceApplication.deleteActorById(1);
         String Expected = "Deleted Successfully";
-        ArgumentCaptor<Integer>integerArgumentCaptor = ArgumentCaptor.forClass(Integer.class);
+        ArgumentCaptor<Integer> integerArgumentCaptor = ArgumentCaptor.forClass(Integer.class);
         verify(actorRepository).deleteById(integerArgumentCaptor.capture());
-        Assertions.assertEquals(Expected,Actual,"Actor not deleted");
+        Assertions.assertEquals(Expected, Actual, "Actor not deleted");
 
     }
 
     @Test
-    public void testUpdateActor(){
+    public void testUpdateActor() {
         Actor updateActor = new Actor("testFirstname", "testLastname");
         updateActor.setActor_id(1);
         when(actorRepository.findById(1)).thenReturn(Optional.of(updateActor));
@@ -91,7 +96,78 @@ public class MockitoTest {
         ArgumentCaptor<Actor> actorArgumentCaptor = ArgumentCaptor.forClass(Actor.class);
         verify(actorRepository).save(actorArgumentCaptor.capture());
         String Expected = "Updated Successfully";
-        Assertions.assertEquals(Expected,Actual,"Shopper was not updated.");
+        Assertions.assertEquals(Expected, Actual, "Shopper was not updated.");
     }
 
+
+
+    // FILM TESTS
+
+    @Test
+    public void testGetAllFilms(){
+        //Assertions.assertEquals(1,1,"wrong"); made a dumb test to ensure we are reaching the repo
+
+        // setup mock environment for filmRepository
+
+        //create a list of movies
+        List<Film> filmList = new ArrayList<Film>();
+        //using contrusctor, we construct a new movie to be added to the mock list
+        Film film1 = new Film(1,"JohN wICK","sick movie","18+",120,1);
+        filmList.add(film1);
+
+        //  created an iterable for the list of films
+        Iterable<Film> filmIterable = filmList;
+
+        // when the mock crud function is called, this returns the iterable we contsructed above.
+        when(filmRepository.findAll()).thenReturn(filmIterable);
+
+        // setting the expected and actual: actual is the function we are testing, expected is the mock we have created
+        Iterable<Film> expected =  filmIterable;
+        Iterable<Film> actual = myFirstMicroServiceApplication.getAllFilms();
+
+        // actual test: sees if the film iterable performs the same function as the get all films crud function
+        Assertions.assertEquals(expected,actual,"test failure");
+
+    }
+
+    @Test
+    public void testGetFilmById(){
+        // create list of movies and mock movie like above
+        List<Film> filmList = new ArrayList<Film>();
+        Film film1 = new Film(1,"JohN wICK","sick movie","18+",120,1);
+        filmList.add(film1);
+
+// try to mock the function using the film example I created
+        when(filmRepository.existsById(film1.getFilm_id())).thenReturn(true);
+        when(filmRepository.findById(film1.getFilm_id())).thenReturn(Optional.of(film1));
+
+
+        Optional<Film>  expected = Optional.of(film1);
+        Optional<Film> actual = myFirstMicroServiceApplication.getFilmById(1);
+
+        Assertions.assertEquals(expected,actual,"Id is not the same");
+
+    }
+
+    @Test
+    public void testGetAllFilmCategories(){
+        List<FilmCategory> filmCatList = new ArrayList<FilmCategory>();
+        FilmCategory testFilmCat = new FilmCategory(2,1);
+        filmCatList.add(testFilmCat);
+
+        Iterable<FilmCategory> filmCatIterable = filmCatList;
+
+        when(filmCategoryRepository.findAll()).thenReturn(filmCatIterable);
+
+        Iterable<FilmCategory> expected = filmCatIterable;
+        Iterable<FilmCategory> actual = myFirstMicroServiceApplication.getAllFilmCategories();
+
+        Assertions.assertEquals(expected,actual,"Film ID and Catgegory ID do not match");
+    }
+
+
+
 }
+
+
+

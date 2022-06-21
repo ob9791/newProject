@@ -6,7 +6,9 @@ import com.tsi.o.blidi.program.Category.Category;
 import com.tsi.o.blidi.program.Category.CategoryRepository;
 import com.tsi.o.blidi.program.Film.Film;
 import com.tsi.o.blidi.program.Film.FilmRepository;
+import com.tsi.o.blidi.program.FilmActor.FilmActor;
 import com.tsi.o.blidi.program.FilmActor.FilmActorRepository;
+import com.tsi.o.blidi.program.FilmCategory.FilmCategory;
 import com.tsi.o.blidi.program.FilmCategory.FilmCategoryRepository;
 import com.tsi.o.blidi.program.Language.Language;
 import com.tsi.o.blidi.program.Language.LanguageRepository;
@@ -15,6 +17,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @SpringBootApplication
 @CrossOrigin(origins = "*")// needed for receiving request via api
@@ -25,10 +29,13 @@ public class MyFirstMicroServiceApplication {
 	@Autowired
 	private ActorRepository actorRepository;
 	private String saved = "saved";
+	private String actors = "Actor";
+	private String nope = "Does not exist";
 	@Autowired
 	private CategoryRepository categoryRepository;
 	@Autowired
 	private FilmRepository filmRepository;
+	private String films = "Film";
 	@Autowired
 	private FilmActorRepository filmActorRepository;
 	@Autowired
@@ -70,6 +77,15 @@ put map = update
 
 	}
 
+	// get actors by actor id
+	@GetMapping("/AllActor/{Actor_id}")
+	public @ResponseBody Optional<Actor> getActorById (@PathVariable int actor_id) {
+		if (actorRepository.existsById(actor_id)) {
+			return actorRepository.findById(actor_id);
+
+		} else throw new ResourceNotFoundException(actors + actor_id + nope);
+	}
+
 	@PostMapping("/add_Actor")
 	public @ResponseBody String addActor(@RequestParam String first_name, String last_name) {
 		Actor addActor = new Actor(first_name, last_name);
@@ -109,6 +125,32 @@ put map = update
 		return filmRepository.findAll();
 	}
 
+	// returns film by id
+	@GetMapping("/film/{film_id}")
+	public @ResponseBody Optional<Film> getFilmById (@PathVariable int film_id){
+
+		if (filmRepository.existsById(film_id)){
+			return filmRepository.findById(film_id);
+		} else throw new ResourceNotFoundException(films + film_id + nope);
+
+	}
+
+
+	// returns a list of movies and the corresponding category id
+	@GetMapping("/All_films/filmCategories")
+	public @ResponseBody
+	Iterable<FilmCategory>getAllFilmCategories() {
+		return filmCategoryRepository.findAll();
+	}
+
+	// returns a list of actors and the corresponding movie id the actor stars in
+
+	@GetMapping("/All_films/{actor_id}")
+	public @ResponseBody
+	Iterable<FilmActor>getAllFilmActors() {
+		return filmActorRepository.findAll();
+	}
+
 	/*@PostMapping("/add_Film")
 	public @ResponseBody String FilmActor(@RequestParam String first_name, String last_name) {
 		Film addFilm = new Film(first_name, last_name);
@@ -116,12 +158,12 @@ put map = update
 		return "saved";
 	}
 */
-	@DeleteMapping("/delete_Films")
+	/*@DeleteMapping("/delete_Films")
 	public @ResponseBody String deleteFilmById(@RequestParam int film_id) {
 		filmRepository.deleteById(film_id);
 		return "Deleted Successfully";
 	}
-
+*/
 	// lANGUAGE CRUD FUNCTION
 	@GetMapping("/allLanguages")
 	public @ResponseBody

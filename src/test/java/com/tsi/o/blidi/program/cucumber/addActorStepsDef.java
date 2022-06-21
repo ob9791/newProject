@@ -1,4 +1,4 @@
-package com.tsi.o.blidi.program;
+package com.tsi.o.blidi.program.cucumber;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;

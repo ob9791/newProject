@@ -6,26 +6,31 @@ import org.junit.jupiter.api.Test;
 
 public class ActorTests {
 
-    Actor testActor = new Actor("first_name", "last_name");
-    Actor testActor2 = new Actor();
-
-
-
-
+    private Actor testActor = new Actor("Tommy", "Shelby");
+    private Actor testActor2 = new Actor(5,"John", "Shelby");
 
     @Test
-    public void testActor(){
-
-        Assertions.assertEquals("first_name",testActor.getFirst_name(), "first_name is not initialised");
-
-        Assertions.assertEquals("last_name", testActor.getLast_name(), "last_name is not initialised");
-
-        testActor2.setFirst_name("testFName");
-        Assertions.assertEquals("testFName", testActor2.getFirst_name(),"First Name Does not Exist");
-        testActor2.setLast_name("testLName");
-        Assertions.assertEquals("testLName", testActor2.getLast_name(),"Last Name does not Exist");
-
-
+    public void testGetActorId(){
+        Assertions.assertEquals(5,testActor2.getActor_id(),"id not found");
     }
+
+    @Test
+    public void testSetActorId(){
+        testActor2.setActor_id(10);
+        Assertions.assertEquals(10,testActor2.getActor_id(),"id not set");
+    }
+
+    @Test
+    public void testGetFirstName(){
+        Assertions.assertEquals("Tommy",testActor.getFirst_name(),"First name not found");
+    }
+
+    @Test
+    public void testSetFirstName(){
+        testActor.setFirst_name("test");
+        Assertions.assertEquals("test",testActor.getFirst_name(),"First name not set");
+    }
+
+    // remember: setting name/id overwrites the actor we created above. therefore using assertequals: test expected, use getname method to get actual name(unless set differently), return message if null
 
 }
