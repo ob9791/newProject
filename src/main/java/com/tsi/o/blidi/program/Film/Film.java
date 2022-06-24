@@ -10,8 +10,9 @@ public class Film{
     //Attributes
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="film_id")
 
-    private int film_id;
+    private int filmId;
     String title;
     String description;
 
@@ -31,8 +32,8 @@ public class Film{
         this.language_id = language_id;
     }
 
-    public Film(int film_id, String title, String description,String rating, int length, int language_id) {
-        this.film_id = film_id;
+    public Film(int filmId, String title, String description, String rating, int length, int language_id) {
+        this.filmId = filmId;
         this.title = title;
         this.description = description;
         this.rating = rating;
@@ -45,12 +46,12 @@ public class Film{
 
 
     // Getters & Setters
-    public int getFilm_id() {
-        return film_id;
+    public int getFilmId() {
+        return filmId;
     }
 
-    public void setFilm_id(int film_id) {
-        this.film_id = film_id;
+    public void setFilmId(int filmId) {
+        this.filmId = filmId;
     }
 
     public String getTitle() {

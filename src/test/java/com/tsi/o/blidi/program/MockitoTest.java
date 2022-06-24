@@ -70,7 +70,7 @@ public class MockitoTest {
 
         Actor savedActor = new Actor("testFirstname", "testLastName");
         String expected = "saved";
-        String Actual = myFirstMicroServiceApplication.addActor(savedActor.getFirst_name(), savedActor.getLast_name());
+        String Actual = myFirstMicroServiceApplication.addActor(savedActor.getFirst_name(),savedActor.getLast_name());
         ArgumentCaptor<Actor> actorArgumentCaptor = ArgumentCaptor.forClass(Actor.class);
         verify(actorRepository).save(actorArgumentCaptor.capture());
         actorArgumentCaptor.getValue();
@@ -81,7 +81,7 @@ public class MockitoTest {
     @Test
     public void testDeleteActor() {
         Actor deletedActor = new Actor("testFirstname", "testLastname");
-        deletedActor.setActor_id(1);
+        deletedActor.setActorId(1);
         String Actual = myFirstMicroServiceApplication.deleteActorById(1);
         String Expected = "Deleted Successfully";
         ArgumentCaptor<Integer> integerArgumentCaptor = ArgumentCaptor.forClass(Integer.class);
@@ -93,9 +93,9 @@ public class MockitoTest {
     @Test
     public void testUpdateActor() {
         Actor updateActor = new Actor("testFirstname", "testLastname");
-        updateActor.setActor_id(1);
+        updateActor.setActorId(1);
         when(actorRepository.findById(1)).thenReturn(Optional.of(updateActor));
-        String Actual = myFirstMicroServiceApplication.updateActor(updateActor.getActor_id(), updateActor.getFirst_name(), updateActor.getLast_name());
+        String Actual = myFirstMicroServiceApplication.updateActor(updateActor.getActorId(), updateActor.getFirst_name(), updateActor.getLast_name());
         ArgumentCaptor<Actor> actorArgumentCaptor = ArgumentCaptor.forClass(Actor.class);
         verify(actorRepository).save(actorArgumentCaptor.capture());
         String Expected = "Updated Successfully";
@@ -121,7 +121,7 @@ public class MockitoTest {
         //  created an iterable for the list of films
         Iterable<Film> filmIterable = filmList;
 
-        // when the mock crud function is called, this returns the iterable we contsructed above.
+        // when the mock crud function is called, this returns the iterable we contsructed above. refer to microservice application
         when(filmRepository.findAll()).thenReturn(filmIterable);
 
         // setting the expected and actual: actual is the function we are testing, expected is the mock we have created
@@ -141,8 +141,8 @@ public class MockitoTest {
         filmList.add(film1);
 
 // try to mock the function using the film example I created
-        when(filmRepository.existsById(film1.getFilm_id())).thenReturn(true);
-        when(filmRepository.findById(film1.getFilm_id())).thenReturn(Optional.of(film1));
+        when(filmRepository.existsById(film1.getFilmId())).thenReturn(true);
+        when(filmRepository.findById(film1.getFilmId())).thenReturn(Optional.of(film1));
 
 
         Optional<Film>  expected = Optional.of(film1);
@@ -217,9 +217,4 @@ public class MockitoTest {
         Assertions.assertEquals(expected,actual,"Category not initialised");
     }
 
-
-
 }
-
-
-

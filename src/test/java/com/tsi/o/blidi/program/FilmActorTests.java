@@ -10,23 +10,23 @@ public class FilmActorTests {
 
     @Test
     public void testGetActor_id(){
-        Assertions.assertEquals(5,testFilmActor.getActor_id(),"FILM ACTOR ID IS NOT INITIALISED");
+        Assertions.assertEquals(5,testFilmActor.getActorId(),"FILM ACTOR ID IS NOT INITIALISED");
     }
 
     @Test
     public void testSetActor_id(){
-        testFilmActor.setActor_id(10);
-        Assertions.assertEquals(10,testFilmActor.getActor_id(),"FilmActor ID not set correctly");
+        testFilmActor.setActorId(10);
+        Assertions.assertEquals(10,testFilmActor.getActorId(),"FilmActor ID not set correctly");
     }
 
     @Test
     public void testGetFilm_id(){
-        Assertions.assertEquals(7,testFilmActor.getFilm_id(),"FILM ACTOR FILM ID IS NOT INITIALISED");
+        Assertions.assertEquals(7,testFilmActor.getFilmId(),"FILM ACTOR FILM ID IS NOT INITIALISED");
     }
 
     @Test
     public void testSetFilm_id(){
-        testFilmActor.setFilm_id(15);
-        Assertions.assertEquals(15,testFilmActor.getFilm_id(),"Film_Id not set correctly");
+        testFilmActor.setFilmId(15);
+        Assertions.assertEquals(15,testFilmActor.getFilmId(),"Film_Id not set correctly");
     }
 }

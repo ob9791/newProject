@@ -10,14 +10,14 @@ public class CategoryTests {
 
     @Test
     public void testGetCategoryId(){
-        Assertions.assertEquals(3,testCat.getCategory_id(),"id not found");
+        Assertions.assertEquals(3,testCat.getCategoryId(),"id not found");
 
     }
 
     @Test
     public void testSetCategoryId(){
-        testCat.setCategory_id(5);
-        Assertions.assertEquals(5,testCat.getCategory_id(),"id not set correctly");
+        testCat.setCategoryId(5);
+        Assertions.assertEquals(5,testCat.getCategoryId(),"id not set correctly");
     }
 
     @Test

@@ -10,13 +10,13 @@ public class FilmTests {
 
     @Test
     public void testGetFilmId(){
-        Assertions.assertEquals(13,testFilm.getFilm_id(),"Film ID not found");
+        Assertions.assertEquals(13,testFilm.getFilmId(),"Film ID not found");
     }
 
     @Test
     public void testSetFilmId(){
-        testFilm.setFilm_id(15);
-        Assertions.assertEquals(15,testFilm.getFilm_id(),"Film ID not set correctly");
+        testFilm.setFilmId(15);
+        Assertions.assertEquals(15,testFilm.getFilmId(),"Film ID not set correctly");
     }
 
     @Test

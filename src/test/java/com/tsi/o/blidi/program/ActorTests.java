@@ -9,15 +9,17 @@ public class ActorTests {
     private Actor testActor = new Actor("Tommy", "Shelby");
     private Actor testActor2 = new Actor(5,"John", "Shelby");
 
+    // unit testing helps finds bugs early in the development phase
+
     @Test
     public void testGetActorId(){
-        Assertions.assertEquals(5,testActor2.getActor_id(),"id not found");
+        Assertions.assertEquals(5,testActor2.getActorId(),"id not found");
     }
 
     @Test
     public void testSetActorId(){
-        testActor2.setActor_id(10);
-        Assertions.assertEquals(10,testActor2.getActor_id(),"id not set");
+        testActor2.setActorId(10);
+        Assertions.assertEquals(10,testActor2.getActorId(),"id not set");
     }
 
     @Test

@@ -10,24 +10,24 @@ public class FilmCategoryTests {
 
     @Test
     public void testGetFilmCatID(){
-        Assertions.assertEquals(15,testFilmCat.getCategory_id(),"Film Category ID is not initialised");
+        Assertions.assertEquals(15,testFilmCat.getCategoryId(),"Film Category ID is not initialised");
     }
 
     @Test
     public void testSetFilmCatID(){
-        testFilmCat.setCategory_id(24);
-        Assertions.assertEquals(24,testFilmCat.getCategory_id(),"FILM CAT ID NOT SET CORRECTLY");
+        testFilmCat.setCategoryId(24);
+        Assertions.assertEquals(24,testFilmCat.getCategoryId(),"FILM CAT ID NOT SET CORRECTLY");
     }
 
     @Test
     public void testGetFilm_idCat(){
-        Assertions.assertEquals(10,testFilmCat.getFilm_id(),"Test failed");
+        Assertions.assertEquals(10,testFilmCat.getFilmId(),"Test failed");
     }
 
     @Test
     public void testSetFilm_idCat(){
-        testFilmCat.setFilm_id(31);
-        Assertions.assertEquals(31,testFilmCat.getFilm_id(),"Film id not set correctly");
+        testFilmCat.setFilmId(31);
+        Assertions.assertEquals(31,testFilmCat.getFilmId(),"Film id not set correctly");
     }
 
 }

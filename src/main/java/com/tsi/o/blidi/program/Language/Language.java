@@ -8,16 +8,17 @@ import javax.persistence.*;
 public class Language {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="language_id")
 
     // Attributes
 
-    private int language_id;
+    private int languageId;
     private String lang;
 
     // Constructor
 
-    public Language(int language_id, String lang) {
-        this.language_id = language_id;
+    public Language(int languageId, String lang) {
+        this.languageId = languageId;
         this.lang = lang;
     }
 
@@ -25,12 +26,12 @@ public class Language {
 
     // Getters nd setters
 
-    public int getLanguage_id() {
-        return language_id;
+    public int getLanguageId() {
+        return languageId;
     }
 
-    public void setLanguage_id(int language_id) {
-        this.language_id = language_id;
+    public void setLanguageId(int languageId) {
+        this.languageId = languageId;
     }
 
     public String getLang() {

@@ -18,6 +18,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @SpringBootApplication
@@ -70,7 +72,7 @@ delete map = delete
 put map = update
  */
 
-	@GetMapping("/All_Actors")
+	@GetMapping("/actors")
 	public @ResponseBody
 	Iterable<Actor> getALLActors() {
 		return actorRepository.findAll();
@@ -86,9 +88,9 @@ put map = update
 		} else throw new ResourceNotFoundException(actors + actor_id + nope);
 	}
 
-	@PostMapping("/add_Actor")
-	public @ResponseBody String addActor(@RequestParam String first_name, String last_name) {
-		Actor addActor = new Actor(first_name, last_name);
+	@PostMapping("/add_Actor/{first_name}{last_name}")
+	public @ResponseBody String addActor(@PathVariable String first_name,String last_name) {
+		Actor addActor = new Actor();
 		actorRepository.save(addActor);
 		return "saved";
 	}
@@ -109,17 +111,33 @@ put map = update
 
 	}
 
-	//category CRUD FUNCTTIONS
+	//category CRUD FUNCTIONS
 
-	@GetMapping("Categories")
+	@GetMapping("/Categories")
 	public @ResponseBody
 	Iterable<Category> getAllCategories() {
 		return categoryRepository.findAll();
 	}
 
+	@GetMapping("/Get_Film_by_Category")
+	public @ResponseBody
+	Iterable<Film> getFilmByCategory(@RequestParam String name){
+
+		Category filmCatName = categoryRepository.findByName(name);
+		int filmCatId = filmCatName.getCategoryId();
+		List filmsFrom = filmCategoryRepository.findByCategoryId(filmCatId);
+		List<FilmCategory> filmCatName_id = filmCategoryRepository.findByCategoryId(filmCatId);
+		List<Integer> filmList = new ArrayList<Integer>();
+		filmCatName_id.forEach(Film -> filmList.add(Film.getFilmId()));
+		Iterable<Film> filmsListFound = filmRepository.findAllById(filmList);
+		return filmsListFound;
+
+	}
+
+
 	// FILM CRUD FUNCTIONS
 
-	@GetMapping("/All_Films")
+	@GetMapping("/film")
 	public @ResponseBody
 	Iterable<Film> getAllFilms() {
 		return filmRepository.findAll();
@@ -135,9 +153,16 @@ put map = update
 
 	}
 
+	@GetMapping("Get_Films_By_Keyword")
+	public Iterable<Film> getFilmsByKeyword(@RequestParam String keyword){
+		keyword = "%" + keyword + "%";
+		return filmRepository.findByTitleLike(keyword);
+	}
+
+
 
 	// returns a list of movies and the corresponding category id
-	@GetMapping("/All_films/filmCategories")
+	@GetMapping("/films/filmCategories")
 	public @ResponseBody
 	Iterable<FilmCategory>getAllFilmCategories() {
 		return filmCategoryRepository.findAll();
@@ -145,7 +170,7 @@ put map = update
 
 	// returns a list of actors and the corresponding movie id the actor stars in
 
-	@GetMapping("/All_films/{actor_id}")
+	@GetMapping("/films/{actor_id}")
 	public @ResponseBody
 	Iterable<FilmActor>getAllFilmActors() {
 		return filmActorRepository.findAll();
@@ -165,7 +190,7 @@ put map = update
 	}
 */
 	// lANGUAGE CRUD FUNCTION
-	@GetMapping("/allLanguages")
+	@GetMapping("/languages")
 	public @ResponseBody
 	Iterable<Language>getAllLanguages(){
 		return languageRepository.findAll();

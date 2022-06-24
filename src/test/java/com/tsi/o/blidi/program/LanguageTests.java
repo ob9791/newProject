@@ -10,13 +10,13 @@ private Language testLang = new Language(4,"Mandarin");
 
     @Test
     public void testGetLangId(){
-        Assertions.assertEquals(4,testLang.getLanguage_id(),"Language id not found");
+        Assertions.assertEquals(4,testLang.getLanguageId(),"Language id not found");
     }
 
     @Test
     public void testSetLangId(){
-        testLang.setLanguage_id(6);
-        Assertions.assertEquals(6,testLang.getLanguage_id(),"Language id not set correctly");
+        testLang.setLanguageId(6);
+        Assertions.assertEquals(6,testLang.getLanguageId(),"Language id not set correctly");
     }
 
     @Test

@@ -14,12 +14,11 @@ java does not know what an actor is, I am giving it definitions that model an ac
 @Table(name="actor")
 public class Actor {
 
-    /*
 
-     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int actor_id;
+    @Column(name="actor_id")
+    private int actorId;
 
     //attributes
     private String first_name;
@@ -31,8 +30,8 @@ public class Actor {
         this.last_name = last_name;
     }
 
-    public Actor(int actor_id, String first_name, String last_name){
-        this.actor_id = actor_id;
+    public Actor(int actorId, String first_name, String last_name){
+        this.actorId = actorId;
         this.first_name = first_name;
         this.last_name = last_name;
     }
@@ -43,12 +42,12 @@ public class Actor {
 
     // getters nd setters
 
-    public int getActor_id(){
-        return actor_id;
+    public int getActorId(){
+        return actorId;
     }
 
-    public void setActor_id(int actor_id){
-        this.actor_id = actor_id;
+    public void setActorId(int actorId){
+        this.actorId = actorId;
     }
 
     public String getFirst_name(){
